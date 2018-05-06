@@ -28,7 +28,6 @@ class CarSensor(pygame.sprite.Sprite):
         self.zone = zone
         self.image = pygame.Surface((30, 30))
         self.color = [opt.LIGHT_GREEN, opt.GREEN, opt.DARK_GREEN][zone]
-        print(self.color)
         self.image.fill(self.color)
         self.image = self.image.convert()
         self.rect = self.image.get_rect()
@@ -111,8 +110,9 @@ class CarSensor(pygame.sprite.Sprite):
                            c.oid, self.oid, opt.str_now())
                     to_file("%d %d %d %s"
                           % (self.car.oid, self.oid, 1, opt.str_now()))
-        if self.reserved:
-            self.image.fill(opt.GRAY)
+
+        if self.reserved:self.image.fill(opt.GRAY)
+        else: self.image.fill(self.color)
         f = pygame.font.SysFont("Arial", 25)
         t = f.render(str(self.oid), 0, opt.WHITE)
         pygame.Surface.blit(self.image, t, (10,0))
@@ -129,3 +129,8 @@ class CarSensor(pygame.sprite.Sprite):
     def __setstate__(self, state):
         self.pos = state["pos"]
         self.zone = state["zone"]
+
+    def __del__(self):
+        for n,car in enumerate(self.world.sensors):
+            car.oid = n
+        CarSensor.oid -= 1
