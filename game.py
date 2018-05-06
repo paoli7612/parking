@@ -133,6 +133,11 @@ class Game:
 
         return int(ratioX), int(ratioY)
 
+    def get_selected(self,mouse_pos):
+        for s in self.all_sprites:
+            if s.rect.collidepoint(*mouse_pos):
+                return s
+
 #
     def events(self):
         for event in pygame.event.get():
@@ -160,23 +165,16 @@ class Game:
             if (event.type == pygame.MOUSEBUTTONDOWN):
                 self.last_mouse_pos = pygame.mouse.get_pos()
                 left, _, right = pygame.mouse.get_pressed()
-                if left:
-                    mouse_pos = self.last_mouse_pos = pygame.mouse.get_pos()
-                    debug("mouse left down at: %s" % str(mouse_pos))
-                    for i, s in enumerate(self.all_sprites):
-                        r = s.rect
-                        if r.collidepoint(*mouse_pos):
-                            debug("Click at %s on %s %d", str(mouse_pos),
-                                  s.__class__.__name__, s.oid)
-                            self.moving_object = s
-                elif right:
-                    mouse_pos = self.last_mouse_pos = pygame.mouse.get_pos()
-                    debug("mouse right down at: %s" % str(mouse_pos))
-                    for i, s in enumerate(self.all_sprites):
-                        r = s.rect
-                        if r.collidepoint(*mouse_pos):
-                            debug("Remove %s ", s.__class__.__name__)
-                            s.kill()
+                mouse_pos = self.last_mouse_pos = pygame.mouse.get_pos()
+                debug("mouse down at: %s" % str(mouse_pos))
+                sprite = self.get_selected(mouse_pos)
+                if left and sprite:
+                    debug("Click at %s on %s %d", str(mouse_pos),
+                          sprite.__class__.__name__, sprite.oid)
+                    self.moving_object = sprite
+                elif right and sprite:
+                    debug("Remove %s ", sprite.__class__.__name__)
+                    sprite.kill()
 
 
             # left mouse released (stop dragging)?
