@@ -4,11 +4,15 @@
 import time
 from parking_simulation import SocketClient
 def main(port):
-    while 1:
+    running = True
+    while running:
         time.sleep(1)
         client = SocketClient(port=port)
-        data = client.get_data()
-        print(data)
+        try:
+            print(client.get_data().decode())
+        except:
+            running = False
+            print("connection lost")
 
 if __name__ == "__main__":
     with open("port.txt") as file:

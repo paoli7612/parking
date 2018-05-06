@@ -7,13 +7,13 @@ README.pdf: README.md
 	pandoc $< -o $@
 
 sim:  parking_simulation.py
-	python $< -v
+	python3 $< -v
 
 socket_client: socket_client.py
-	python $<
+	python3 $<
 
 repl_client: socket_client_cli.py
-	python $<
+	python3 $<
 
 clean:
 	rm -f *~ *.pyc

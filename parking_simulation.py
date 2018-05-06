@@ -91,7 +91,7 @@ class SocketServer():
             ss = [v and "X" or "_"
                   for _,v in self._get_sensors_state()]
             o = " ".join(ss)
-            channel.send(o)
+            channel.send(o.encode())
             channel.close()
 
 #
