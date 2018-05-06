@@ -159,16 +159,25 @@ class Game:
             # left mouse click on object (start dragging it)?
             if (event.type == pygame.MOUSEBUTTONDOWN):
                 self.last_mouse_pos = pygame.mouse.get_pos()
-                left, _, _ = pygame.mouse.get_pressed()
+                left, _, right = pygame.mouse.get_pressed()
                 if left:
                     mouse_pos = self.last_mouse_pos = pygame.mouse.get_pos()
-                    debug("mouse down at: %s" % str(pygame.mouse.get_pos()))
+                    debug("mouse left down at: %s" % str(mouse_pos))
                     for i, s in enumerate(self.all_sprites):
                         r = s.rect
                         if r.collidepoint(*mouse_pos):
                             debug("Click at %s on %s %d", str(mouse_pos),
                                   s.__class__.__name__, s.oid)
                             self.moving_object = s
+                elif right:
+                    mouse_pos = self.last_mouse_pos = pygame.mouse.get_pos()
+                    debug("mouse right down at: %s" % str(mouse_pos))
+                    for i, s in enumerate(self.all_sprites):
+                        r = s.rect
+                        if r.collidepoint(*mouse_pos):
+                            debug("Remove %s ", s.__class__.__name__)
+                            s.kill()
+
 
             # left mouse released (stop dragging)?
             if (event.type == pygame.MOUSEBUTTONUP):
