@@ -287,6 +287,12 @@ class Game:
         if file is None:
             file = self.backup_file
         debug("Saving state to '%s'", file)
+
+        # convert all vectors in tuple
+        for s in self.all_sprites:
+            try: s.pos = tuple(s.pos)
+            except: pass
+
         with open(file, "wb") as file:
             pickle.dump((self.sensors, self.cars), file)
 
