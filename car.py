@@ -90,6 +90,7 @@ class Car(pygame.sprite.Sprite):
                 self.move_step = 0
 
         # update
+        self.image.fill(opt.YELLOW)
         self.rect.center = self.pos
         f = pygame.font.SysFont("Arial", 25)
         t = f.render(str(self.oid), 0, opt.BLACK)
@@ -115,3 +116,8 @@ class Car(pygame.sprite.Sprite):
 
     def __setstate__(self, state):
         self.pos = state["pos"]
+
+    def __del__(self):
+        for n,car in enumerate(self.world.cars):
+            car.oid = n
+        Car.oid -= 1
