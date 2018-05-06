@@ -14,7 +14,7 @@ error = logging.error
 warning = logging.warning
 collide = pygame.sprite.spritecollide
 
-from vec import Vec2d as Vector
+Vector = pygame.math.Vector2
 
 class CarSensor(pygame.sprite.Sprite):
     oid = 0

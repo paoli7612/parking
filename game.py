@@ -8,7 +8,7 @@ import settings as opt
 import car
 import car_sensor
 import stairs
-from vec import Vec2d as Vector
+Vector = pygame.math.Vector2
 
 collide = pygame.sprite.spritecollide
 

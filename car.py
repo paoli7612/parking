@@ -9,7 +9,7 @@ debug = logging.debug
 error = logging.error
 warning = logging.warning
 
-from vec import Vec2d as Vector
+Vector = pygame.math.Vector2
 
 collide = pygame.sprite.spritecollide
 
@@ -102,7 +102,7 @@ class Car(pygame.sprite.Sprite):
         self.move_target = sensor
         sensor.reserved = True
         self.move_step = (sensor.pos - self.pos)/50.
-        self.move_len = self.move_step.get_length()
+        self.move_len = self.move_step.length()
 
 #
     def unpark_from_sensor(self, sensor):
