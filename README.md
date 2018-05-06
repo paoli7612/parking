@@ -19,8 +19,13 @@ con i seguenti tasti:
 5.  `u` "sparcheggia" una macchina a caso (parcheggiata) seguendo le indicazioni delle luci che si sono accese,
 6.  `x` fa partire o arresta la modalità "automatica",
 7.  `b` salva lo stato del sistema (posizioni di sensori e macchine),
-8.  `r` ripristina lo stato dal file di cui sopra (`parking.state`).
+8.  `r` ripristina lo stato dal file di cui sopra (`parking.state`),
 9.  `l` mostra delle informazioni sullo stato del sistema.
+
+Il mouse ci permette di modificare i sensori e le macchine aggiunti
+ - Premendo il tasto sinistro e trascinando il mouse possiamo muovere l'oggetto
+    in una nuova posizione
+ - Premendo il tasto destro su un oggetto lo eliminiamo
 
 Durante il funzionamento, il programma (se eseguito con l'opzione `-v`
 come da *makefile*) fa il *logging* di vari eventi. Si ottiene
